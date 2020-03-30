@@ -1,0 +1,7 @@
+{
+  "name": "ionicQuickStart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
