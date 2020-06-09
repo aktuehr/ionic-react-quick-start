@@ -1,8 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
 import ExploreContainer from '../components/ExploreContainer';
-import RunCamera from '../components/RunCamera'
 import './Home.css';
+import BarcodeReader from '../components/BarcodeReader';
 
 const Home: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer />
-        <RunCamera />
+        <BarcodeReader />
       </IonContent>
     </IonPage>
   );
