@@ -13,12 +13,18 @@ import { Route, Redirect } from "react-router";
 import PageB from "../PageB/PageB";
 import PageA from "../PageA/PageA";
 import Home from "../Home/Home";
+import Tutorial from "../Tutorial/Tutorial";
+
+const showTutorial = (): boolean => {
+  // TODO きちんと状態判定するのと、場所を移動した方がよさそう？
+  return true;
+}
 
 const TabsExample: React.FC = () => (
   <IonTabs>
     <IonRouterOutlet>
       <Redirect exact path="/tabs" to="tabs/home" />
-      <Route exact path="/tabs/home" component={Home} />
+      <Route exact path="/tabs/home" render={() => { return showTutorial ? <Tutorial /> : <Home /> }} />
       <Route path="/tabs/pageA" component={PageA} exact={true} />
       <Route path="/tabs/pageB" render={() => <PageB />} exact={true} />
     </IonRouterOutlet>
