@@ -17,8 +17,11 @@ const slideOpts = {
 
 const Tutorial: React.FC<RouteComponentProps> = ({ history }) => {
   const endTutorial = async () => {
-    await setShowedTutorial();
-    history.push("/tabs/pageA");
+    console.log("end tutorial");
+    await setShowedTutorial({ isShowedTutorial: true });
+    // hooksでセットした方が良さそう
+    console.log("redirect /tabs");
+    history.push("/tabs/home");
   };
   return (
     <IonPage>
