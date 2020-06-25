@@ -6,13 +6,20 @@ import {
   IonButton,
 } from "@ionic/react";
 import React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
+/** from "utils/Storage" としたい */
+import { setShowedTutorial } from "../../utils/Storage";
 
 const slideOpts = {
   initialSlide: 0,
   speed: 400,
 };
 
-const Tutorial: React.FC = () => {
+const Tutorial: React.FC<RouteComponentProps> = ({ history }) => {
+  const endTutorial = async () => {
+    await setShowedTutorial();
+    history.push("/tabs/pageA");
+  };
   return (
     <IonPage>
       <IonContent>
@@ -26,7 +33,7 @@ const Tutorial: React.FC = () => {
           <IonSlide>
             <div>
               Slide 3<br />
-              <IonButton>Start App!</IonButton>
+              <IonButton onClick={endTutorial}>Start App!</IonButton>
             </div>
           </IonSlide>
         </IonSlides>
@@ -35,4 +42,4 @@ const Tutorial: React.FC = () => {
   );
 };
 
-export default Tutorial;
+export default withRouter(Tutorial);
