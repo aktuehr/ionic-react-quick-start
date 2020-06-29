@@ -10,11 +10,12 @@ import {
 } from "@ionic/react";
 import { home, personCircle, informationCircle } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import PageB from "../PageB/PageB";
-import PageA from "../PageA/PageA";
-import Home from "../Home/Home";
+import PageB from "./PageB/PageB";
+import PageA from "./PageA/PageA";
+import Home from "./Home/Home";
 
 const Tabs: React.FC = () => {
+  console.log("Tabs: ");
   return (
     <IonTabs>
       <IonRouterOutlet>
