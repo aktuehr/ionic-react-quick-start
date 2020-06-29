@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   IonTabs,
   IonTabBar,
@@ -13,40 +13,13 @@ import { Route, Redirect } from "react-router";
 import PageB from "../PageB/PageB";
 import PageA from "../PageA/PageA";
 import Home from "../Home/Home";
-import Tutorial from "../TutorialPage/TutorialPage";
-import { getShowedTutorial } from "../../utils/Storage";
 
-const TabsExample: React.FC = () => {
-  // hooksで取得してみる
-  const [isShowedTutorial, setIsShowedTutorial] = useState(false);
-
-  const showedTutorial = async (): Promise<boolean> => {
-    const showedTutorial = await getShowedTutorial();
-    console.log("showedTutorial");
-    console.log(showedTutorial);
-    return showedTutorial;
-  };
-
-  useEffect(() => {
-    const fetchShowedTutorial = async () => {
-      const isShowedTutorial = await showedTutorial();
-      setIsShowedTutorial(isShowedTutorial);
-    };
-    console.log("useEffect1");
-    fetchShowedTutorial();
-  }, []);
-
+const Tabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
         <Redirect exact path="/tabs" to="tabs/home" />
-        <Route
-          exact
-          path="/tabs/home"
-          render={() => {
-            return isShowedTutorial ? <Home /> : <Tutorial />;
-          }}
-        />
+        <Route exact path="/tabs/home" render={() => <Home />} />
         <Route path="/tabs/pageA" component={PageA} exact={true} />
         <Route path="/tabs/pageB" render={() => <PageB />} exact={true} />
       </IonRouterOutlet>
@@ -71,4 +44,4 @@ const TabsExample: React.FC = () => {
   );
 };
 
-export default TabsExample;
+export default Tabs;
