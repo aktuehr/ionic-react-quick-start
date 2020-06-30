@@ -6,32 +6,40 @@ import { IonRouterOutlet } from "@ionic/react";
 import { StorageContext } from "../contexts/StrorageContext";
 import TutorialPage from "./TutorialPage/TutorialPage";
 
-const Origin: React.FC = () => {
+const OriginRouting: React.FC = () => {
   const storageContext = useContext(StorageContext);
-  console.log("Origin: ");
-  console.log(storageContext.isShowedTutorial);
+  const isShowedTutorial = storageContext.isShowedTutorial;
+  const isStorageLoaded = storageContext.isStorageLoaded;
 
-  return storageContext.isStorageLoaded ? (
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="/tabs" component={Tabs} />
-        <Route path="/tutorial" component={TutorialPage} exact={true} />
-        <Route
-          exact
-          path="/"
-          render={() =>
-            storageContext.isShowedTutorial ? (
-              <Redirect to="/tabs" />
-            ) : (
-              <Redirect to="/tutorial" />
-            )
-          }
-        />
-      </IonRouterOutlet>
-    </IonReactRouter>
-  ) : (
-    <h1 style={{ color: "orange" }}>Loading</h1>
+  /** Tutorialを表示したかどうかを判定するまで何かを返しておく */
+  if (!isStorageLoaded) return <></>;
+
+  /** Tutorialを表示しない場合は強制的にTutorialに遷移 */
+  console.log("display tutorial?");
+  if (!isShowedTutorial)
+    return (
+      <>
+        <Route path="/tutorial" component={TutorialPage} />
+        <Route path="/" render={() => <Redirect to="/tutorial" />} />
+      </>
+    );
+
+  /** Tutorialを表示している場合はTabsに遷移 */
+  console.log("display tabs");
+  return (
+    <>
+      <Route path="/tabs" component={Tabs} />
+      <Route path="/" render={() => <Redirect to="/tabs" />} />
+    </>
   );
 };
+
+const Origin: React.FC = () => (
+  <IonReactRouter>
+    <IonRouterOutlet>
+      <OriginRouting />
+    </IonRouterOutlet>
+  </IonReactRouter>
+);
 
 export default Origin;

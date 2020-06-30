@@ -5,10 +5,11 @@ import {
   IonSlide,
   IonButton,
 } from "@ionic/react";
-import React from "react";
+import React, { useContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 /** from "utils/Storage" としたい */
 import { setShowedTutorial } from "../../utils/Storage";
+import { StorageContext } from "../../contexts/StrorageContext";
 
 const slideOpts = {
   initialSlide: 0,
@@ -16,9 +17,11 @@ const slideOpts = {
 };
 
 const Tutorial: React.FC<RouteComponentProps> = ({ history }) => {
+  const storageContext = useContext(StorageContext);
   const endTutorial = async () => {
     console.log("end tutorial");
     await setShowedTutorial({ isShowedTutorial: true });
+    storageContext.updateIsShowedTutorial(true);
     // hooksでセットした方が良さそう
     console.log("redirect /tabs");
     history.push("/tabs/home");
