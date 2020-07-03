@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { Plugins } from "@capacitor/core";
+import { Brightness } from "@ionic-native/brightness/ngx";
 
 interface OpenBrowserProps {
   url: string;
@@ -15,9 +16,18 @@ interface OpenBrowserProps {
 
 const PageA: React.FC = () => {
   const { Browser } = Plugins;
+  const brightness = new Brightness();
 
   const openBrowser = ({ url }: OpenBrowserProps) => {
     Browser.open({ url: "http://capacitor.ionicframework.com/" });
+  };
+
+  const brightnessZero = () => {
+    brightness.setBrightness(0);
+  };
+
+  const brightnessOne = () => {
+    brightness.setBrightness(1);
   };
 
   return (
@@ -37,6 +47,8 @@ const PageA: React.FC = () => {
           <IonButton onClick={() => openBrowser({ url: "hoge" })}>
             AppInBrowserde開く
           </IonButton>
+          <IonButton onClick={() => brightnessZero()}>Brightness0</IonButton>
+          <IonButton onClick={() => brightnessOne()}>Brightness1</IonButton>
         </section>
       </IonContent>
     </IonPage>
