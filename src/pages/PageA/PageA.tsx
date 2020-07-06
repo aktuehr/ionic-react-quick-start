@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { Plugins } from "@capacitor/core";
 import { Brightness } from "@ionic-native/brightness/ngx";
-
+import { BrowserTab } from "@ionic-native/browser-tab/ngx";
 interface OpenBrowserProps {
   url: string;
 }
@@ -17,6 +17,7 @@ interface OpenBrowserProps {
 const PageA: React.FC = () => {
   const { Browser } = Plugins;
   const brightness = new Brightness();
+  const browserTab = new BrowserTab();
 
   const openBrowser = ({ url }: OpenBrowserProps) => {
     Browser.open({ url: "http://capacitor.ionicframework.com/" });
@@ -28,6 +29,32 @@ const PageA: React.FC = () => {
 
   const brightnessOne = () => {
     brightness.setBrightness(1);
+  };
+
+  const openBrowserTab = async () => {
+    console.log("openBrowserTab");
+    const isAvailable = await browserTab.isAvailable();
+    console.log("hoge");
+
+    if (isAvailable) {
+      browserTab.openUrl("https://github.com");
+    } else {
+      browserTab.openUrl(
+        "https://ionicframework.com/jp/docs/native/browser-tab"
+      );
+    }
+
+    console.log(isAvailable);
+    // browserTab.isAvailable().then((isAvailable: boolean) => {
+    //   if (isAvailable) {
+    //     browserTab.openUrl("https://github.com");
+    //   } else {
+    //     // open URL with InAppBrowser instead or SafariViewController
+    //     browserTab.openUrl(
+    //       "https://ionicframework.com/jp/docs/native/browser-tab"
+    //     );
+    //   }
+    // });
   };
 
   return (
@@ -49,6 +76,9 @@ const PageA: React.FC = () => {
           </IonButton>
           <IonButton onClick={() => brightnessZero()}>Brightness0</IonButton>
           <IonButton onClick={() => brightnessOne()}>Brightness1</IonButton>
+          <IonButton onClick={() => openBrowserTab()}>
+            BrowserTabで開く
+          </IonButton>
         </section>
       </IonContent>
     </IonPage>

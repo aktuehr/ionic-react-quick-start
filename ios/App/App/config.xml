@@ -6,6 +6,10 @@
     <param name="ios-package" value="Brightness"/>
   </feature>
 
+  <feature name="BrowserTab">
+    <param name="ios-package" value="CBTBrowserTab"/>
+  </feature>
+
   <feature name="BarcodeScanner">
     <param name="ios-package" value="CDVBarcodeScanner"/>
   </feature>
