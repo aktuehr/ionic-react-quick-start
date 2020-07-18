@@ -32,16 +32,31 @@ const PageA: React.FC = () => {
     brightness.setBrightness(1);
   };
 
-  const openBrowserTab = () => {
-    browserTab.isAvailable()
-      .then(isAvailable => {
-        if (isAvailable) {
-          browserTab.openUrl('https://github.com/');
-        } else {
-          // open URL with InAppBrowser instead or SafariViewController
-        }
-      });
-  }
+  const openBrowserTab = async () => {
+    console.log("openBrowserTab");
+    const isAvailable = await browserTab.isAvailable();
+    console.log("hoge");
+
+    if (isAvailable) {
+      browserTab.openUrl("https://github.com");
+    } else {
+      browserTab.openUrl(
+        "https://ionicframework.com/jp/docs/native/browser-tab"
+      );
+    }
+
+    console.log(isAvailable);
+    // browserTab.isAvailable().then((isAvailable: boolean) => {
+    //   if (isAvailable) {
+    //     browserTab.openUrl("https://github.com");
+    //   } else {
+    //     // open URL with InAppBrowser instead or SafariViewController
+    //     browserTab.openUrl(
+    //       "https://ionicframework.com/jp/docs/native/browser-tab"
+    //     );
+    //   }
+    // });
+  };
 
   return (
     <IonPage id="page-1">
@@ -62,7 +77,13 @@ const PageA: React.FC = () => {
           </IonButton>
           <IonButton onClick={() => brightnessZero()}>Brightness0</IonButton>
           <IonButton onClick={() => brightnessOne()}>Brightness1</IonButton>
+<<<<<<< HEAD
           <IonButton onClick={() => openBrowserTab()}>BrowserTabで開く</IonButton>
+=======
+          <IonButton onClick={() => openBrowserTab()}>
+            BrowserTabで開く
+          </IonButton>
+>>>>>>> 93b05738658da0b19cc8103593667f9c1eb975d3
         </section>
       </IonContent>
     </IonPage>
