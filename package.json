@@ -58,7 +58,7 @@
     ]
   },
   "devDependencies": {
-    "@angular/core": "^10.0.2",
+    "@angular/core": "^11.0.5",
     "@capacitor/cli": "1.5.2"
   },
   "description": "An Ionic project"
